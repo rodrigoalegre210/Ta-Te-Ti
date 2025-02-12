@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang = "es">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <title>Ta-Te-Ti</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css')}}">
+</head>
+<body>
+    <div id = "contenedor-linea-superior">
+        <div id = "sombra-superior"></div>
+        <div id = "linea-superior"></div>
+    </div>
+    <h1>Ta-Te-Ti</h1>
+    <p id = "estado">Tu turno</p>
+    <div id = "tablero">
+
+        {% for i in range(9) %}
+            <div class = "celda" data-posicion = "{{ i }}"></div>
+        {% endfor %}
+
+        <div class = "linea-horizontal"></div>
+        <div class = "linea-horizontal2"></div>
+
+        <div class = "linea-vertical"></div>
+        <div class = "linea-vertical2"></div>
+
+    </div>
+    <button id = "reiniciar">Jugar otra vez</button>
+    <div id = "contenedor-linea-inferior">
+        <div id = "sombra-inferior"></div>
+        <div id = "linea-inferior"></div>
+    </div>
+    <script src = "/static/js/juego.js"></script>
+</body>
+</html>
