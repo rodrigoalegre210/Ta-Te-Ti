@@ -45,8 +45,8 @@ acciones aleatorias con probabilidad *ε* y elige la mejor acción conocida con 
 *(1 - ε)*.
 - **Actualización de valores Q**: Se usa la fórmula:
 
-    \[
-    Q(s,a) = Q(s,a) + \alpha (r + \gamma \max Q(s',a') - Q(s,a))
-    \]
+        \[
+        Q(s,a) = Q(s,a) + \alpha (r + \gamma \max Q(s',a') - Q(s,a))
+        \]
 
 Número:
