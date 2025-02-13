@@ -44,9 +44,9 @@ una tabla **Q** para almacenar los valores de recompensa de cada acción posible
 acciones aleatorias con probabilidad *ε* y elige la mejor acción conocida con probabilidad
 *(1 - ε)*.
 - **Actualización de valores Q**: Se usa la fórmula:
-
-        \[
-        Q(s,a) = Q(s,a) + \alpha (r + \gamma \max Q(s',a') - Q(s,a))
-        \]
+  
+  \[
+  Q(s,a) = Q(s,a) + \alpha (r + \gamma \max Q(s', a') - Q(s,a))
+  \]
 
 Número:
