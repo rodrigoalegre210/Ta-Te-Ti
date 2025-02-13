@@ -1,4 +1,4 @@
-<h1 aling = "center"> Ta-Te-Ti con Q-learning</h1>
+<h1 align = "center"> Ta-Te-Ti con Q-learning</h1>
 
 > **Versión 1.1** - Última actualización: 13/02/2025
 
