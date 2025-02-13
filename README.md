@@ -18,4 +18,14 @@ que mejora su desempeño con cada partida jugada.
 >[!TIP]
 > Hay que jugar varias veces contra el bot para ver cómo mejora su estrategia con el tiempo.
 
+---
+
+## Tecnologías usadas.
+
+| Tecnología | Descripción |
+|------------|-------------|
+| **Python** | Lenguaje principal del proyecto |
+| **Flas** | Framework para la API REST |
+| **JavaScript** | Manejo de eventos y comunicación con la API |
+
 Número:
