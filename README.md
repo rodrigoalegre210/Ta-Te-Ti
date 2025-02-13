@@ -15,7 +15,7 @@ que mejora su desempeño con cada partida jugada.
 * **Bot entrenado con Q-learing**, que aprende de sus partidas y ajusta su estrategia.
 * **Persistencia de aprendizaje**, almacenando la tabla Q en un archivo JSON.
 
->[!TIP]
+> [!TIP]
 > Hay que jugar varias veces contra el bot para ver cómo mejora su estrategia con el tiempo.
 
 ---
@@ -47,4 +47,36 @@ acciones aleatorias con probabilidad *ε* y elige la mejor acción conocida con 
   
   $$ Q(s,a) = Q(s,a) + \alpha (r + \gamma \max Q(s', a') - Q(s,a)) $$
 
-Número:
+    - **Q(s,a)** es el valor actual del estado *s* y acción *a*
+    - *α* es la tasa de aprendizaje.
+    - *γ* es el factor de descuento.
+    - *r* es la recompensa.
+    - *s'* es el nuevo estado después de tomar la ación *a*.
+
+- **Recompensas**:
+
+    - 🏆 **+1** si el bot gana.
+    - ❌ **-1** si el bot pierde.
+    - ⚖️ **0** en caso de empate o estado intermedio.
+
+> [!IMPORTANT]
+> Cuanto más juega el bot, más precisa se vuelve su estrategia, aprendiendo de sus errores.
+
+---
+
+## ¿Cómo se juega?
+
+1. El juego empieza con el turno del usuario (símbolo **X**).
+2. Hacer clic en una celda para hacer el movimiento.
+3. El bot (símbolo **O**) responderá automáticamente con su jugada.
+4. Seguir jugando hasta que haya un ganador o un empate entre ambos.
+5. Podes reiniciar el juego haciendo clic en "Jugar otra vez".
+
+> [!TIP]
+> Intentá jugar varias veces contra el bot para ver cómo cambia su estrategia.
+
+*Hay que tener en cuenta que el bot necesitaría muchas partidas para aprender a jugar mejor.*
+
+---
+
+<h3 aling = "center"> Proyecto IA Nº <span style = "color:#ff6600">[X]</span></h3>
