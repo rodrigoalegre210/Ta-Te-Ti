@@ -79,4 +79,4 @@ acciones aleatorias con probabilidad *ε* y elige la mejor acción conocida con 
 
 ---
 
-<h3 aling = "center"> Proyecto IA Nº <span style = "color:#ff6600">[X]</span></h3>
+<h3 align = "center"> Proyecto IA Nº <span style = "color:#ff6600;">[X]</span></h3>
