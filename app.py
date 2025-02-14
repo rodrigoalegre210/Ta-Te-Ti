@@ -39,6 +39,16 @@ def jugar():
         })
     
     # Movimiento del bot.
+    estado_anterior = bot.obtener_estado(juego.tablero)
+    movimientos_validos = [i for i, celda in enumerate(juego.tablero) if celda == ' ']
+
+    if not movimientos_validos:
+        bot.actualizar_q(0, bot.obtener_estado(juego.tablero))
+        bot.guardar_q_table()
+        return jsonify({'movimiento_bot': None,
+                        'estado_juego': juego.tablero,
+                        'ganador': 'empate'})
+    
     movimiento_bot = bot.hacer_movimiento(juego.tablero)
     juego.hacer_movimiento(movimiento_bot, 'O')
 
