@@ -29,8 +29,10 @@ def jugar():
     ganador = juego.comprobar_ganador()
 
     if ganador:
-        bot.actualizar_q(-1, bot.obtener_estado(juego.tablero)) # Castigamos al bot.
-        bot.guardar_q_table() # Guardamos la tabla Q
+        if bot.estado_anterior is not None and bot.accion_anterior is not None:
+            bot.actualizar_q(bot.estado_anterior, bot.accion_anterior, -1, bot.obtener_estado(juego.tablero))
+
+        bot.guardar_q_table()
 
         return jsonify({
             'movimiento_bot': None,
@@ -43,7 +45,7 @@ def jugar():
     movimientos_validos = [i for i, celda in enumerate(juego.tablero) if celda == ' ']
 
     if not movimientos_validos:
-        bot.actualizar_q(0, bot.obtener_estado(juego.tablero))
+        bot.actualizar_q(bot.estado_anterior, bot.accion_anterior, 0, bot.obtener_estado(juego.tablero))
         bot.guardar_q_table()
         return jsonify({'movimiento_bot': None,
                         'estado_juego': juego.tablero,
@@ -52,11 +54,14 @@ def jugar():
     movimiento_bot = bot.hacer_movimiento(juego.tablero)
     juego.hacer_movimiento(movimiento_bot, 'O')
 
+    bot.estado_anterior = estado_anterior
+    bot.accion_anterior = movimiento_bot
+
     # Verificamos si el bot ganó.
     ganador = juego.comprobar_ganador()
 
     if ganador:
-        bot.actualizar_q(1, bot.obtener_estado(juego.tablero)) # Recompensar al bot.
+        bot.actualizar_q(bot.estado_anterior, bot.accion_anterior, 1, bot.obtener_estado(juego.tablero)) # Recompensar al bot.
         bot.guardar_q_table() # Guardamos la tabla Q.
         return jsonify({
             'movimiento_bot': movimiento_bot,
@@ -75,7 +80,7 @@ def jugar():
         })
     
     # Actualizar Q para estado intermedio.
-    bot.actualizar_q(0, bot.obtener_estado(juego.tablero))
+    bot.actualizar_q(bot.estado_anterior, bot.accion_anterior, 0, bot.obtener_estado(juego.tablero))
 
     return jsonify({
         'movimiento_bot': movimiento_bot,

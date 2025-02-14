@@ -10,6 +10,8 @@ class Bot:
         self.gamma = gamma # Factor de descuento.
         self.epsilon = epsilon # Probabilidad de explorar.
         self.epsilon_decay = 0.995 # Reducción progresiva de epsilon.
+        self.estado_anterior = None
+        self.accion_anterior = None
         self.cargar_q_table()
 
     # Convierte el tablero en una representación única para usar como clave.
@@ -20,16 +22,17 @@ class Bot:
     def guardar_q_table(self):
 
         with open("q_table.json", "w") as f:
-            json.dump(self.q_table, f)
+            json.dump({str(k): v for k, v in self.q_table.items()}, f)
 
     # Carga la tabla Q desde un archivo JSON, deserializando las claves.
     def cargar_q_table(self):
 
         try:
             with open("q_table.json", "r") as f:
-                self.q_table = json.load(f)
+                data = json.load(f)
+                self.q_table = {eval(k): v for k, v in data.items()}
             
-        except FileNotFoundError:
+        except (FileNotFoundError, json.JSONDecodeError):
             self.q_table = {}
     
     # Selecciona una acción usando la política epsilon-greedy.
@@ -45,9 +48,9 @@ class Bot:
             )
        """ 
     # Actualiza los valores Q usando la ecuación de Bellman.
-    def actualizar_q(self, estado_anterior, accion, recompensa, estado_actual):
+    def actualizar_q(self, estado_anterior, accion_anterior, recompensa, estado_actual):
 
-        estado_accion_anterior = (estado_anterior, accion)
+        estado_accion_anterior = (estado_anterior, accion_anterior)
         valor_actual = self.q_table.get(estado_accion_anterior, 0)
 
         estado_actual_q = [self.q_table.get((estado_actual, a), 0)
