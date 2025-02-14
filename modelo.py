@@ -56,7 +56,7 @@ class Bot:
             estado_accion_anterior = (self.estado_anterior, self.accion_anterior)
             estado_actual_q = [
                 self.q_table.get((estado_actual, a), 0)
-                for a in range(9)
+                for a in range(9) if (estado_actual, a) in self.q_table
             ]
 
             # Fórmula Q-learning.
