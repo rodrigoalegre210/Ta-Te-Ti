@@ -11,7 +11,7 @@ class Juego:
 
     def es_movimiento_valido(self, posicion):
 
-        return self.tablero[posicion] == ' '
+        return 0 <= posicion < 9 and self.tablero[posicion] == ' '
     
     def comprobar_ganador(self):
 
@@ -29,4 +29,4 @@ class Juego:
         return None
     
     def comprobar_empate(self):
-        return ' ' not in self.tablero
+        return ' ' not in self.tablero and self.comprobar_ganador() is None
