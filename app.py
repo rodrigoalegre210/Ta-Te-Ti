@@ -39,7 +39,6 @@ def jugar():
         })
     
     # Movimiento del bot.
-    estado_anterior = bot.obtener_estado(juego.tablero)
     movimiento_bot = bot.hacer_movimiento(juego.tablero)
     juego.hacer_movimiento(movimiento_bot, 'O')
 
@@ -54,7 +53,7 @@ def jugar():
             'estado_juego': juego.tablero,
             'ganador': ganador
         })
-    
+
     # Verificamos empate.
     if juego.comprobar_empate():
         bot.actualizar_q(0, bot.obtener_estado(juego.tablero)) # Recompensa neutral.
