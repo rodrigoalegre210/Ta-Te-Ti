@@ -9,12 +9,17 @@ juego = Juego()
 bot = Bot()
 bot.cargar_q_table() # Cargamos la tabla Q al iniciar.
 
+victorias_usuario = 0
+victorias_bot = 0
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/jugar', methods = ['POST'])
 def jugar():
+    global victorias_usuario, victorias_bot
+
     datos = request.get_json()
     movimiento_usuario = int(datos.get('movimiento')) # Movimiento del usuario.
 
@@ -34,10 +39,15 @@ def jugar():
 
         bot.guardar_q_table()
 
+        if ganador == 'X':
+            victorias_usuario += 1
+
         return jsonify({
             'movimiento_bot': None,
             'estado_juego': juego.tablero,
-            'ganador': ganador
+            'ganador': ganador,
+            'victorias_usuario': victorias_usuario,
+            'victorias_bot': victorias_bot
         })
     
     # Movimiento del bot.
@@ -49,7 +59,10 @@ def jugar():
         bot.guardar_q_table()
         return jsonify({'movimiento_bot': None,
                         'estado_juego': juego.tablero,
-                        'ganador': 'empate'})
+                        'ganador': 'empate',
+                        'victorias_usuario': victorias_usuario,
+                        'victorias_bot': victorias_bot
+                        })
     
     movimiento_bot = bot.hacer_movimiento(juego.tablero)
     juego.hacer_movimiento(movimiento_bot, 'O')
@@ -63,10 +76,16 @@ def jugar():
     if ganador:
         bot.actualizar_q(bot.estado_anterior, bot.accion_anterior, 1, bot.obtener_estado(juego.tablero)) # Recompensar al bot.
         bot.guardar_q_table() # Guardamos la tabla Q.
+
+        if ganador == 'O':
+            victorias_bot += 1
+
         return jsonify({
             'movimiento_bot': movimiento_bot,
             'estado_juego': juego.tablero,
-            'ganador': ganador
+            'ganador': ganador,
+            'victorias_usuario': victorias_usuario,
+            'victorias_bot': victorias_bot
         })
 
     # Verificamos empate.
@@ -76,7 +95,9 @@ def jugar():
         return jsonify({
             'movimiento_bot': movimiento_bot,
             'estado_juego': juego.tablero,
-            'ganador': 'Empate'
+            'ganador': 'Empate',
+            'victorias_usuario': victorias_usuario,
+            'victorias_bot': victorias_bot
         })
     
     # Actualizar Q para estado intermedio.
@@ -85,7 +106,9 @@ def jugar():
     return jsonify({
         'movimiento_bot': movimiento_bot,
         'estado_juego': juego.tablero,
-        'ganador': None
+        'ganador': None,
+        'victorias_usuario': victorias_usuario,
+        'victorias_bot': victorias_bot
     })
 
 @app.route('/reiniciar', methods = ['POST'])

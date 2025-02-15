@@ -2,6 +2,8 @@
 const celdas = document.querySelectorAll('.celda');
 const estado = document.getElementById('estado');
 const botonReiniciar = document.getElementById('reiniciar');
+const contadorUsuario = document.getElementById('contador-usuario')
+const contadorBot = document.getElementById('contador-bot')
 
 let juegoTerminado = false; // Estado para controlar si el juego terminó
 
@@ -10,6 +12,11 @@ function actualizarTablero(estadoJuego) {
     celdas.forEach((celda, indice) => {
         celda.textContent = estadoJuego[indice];
     });
+}
+
+function actualizarContador(victorias) {
+    contadorUsuario.textContent = victorias.usuario;
+    contadorBot.textContent = victorias.bot;
 }
 
 // Función para realizar un movimiento
@@ -36,6 +43,7 @@ function realizarMovimiento(posicion) {
             estado.textContent = datos.ganador.toLowerCase() === 'empate'
                 ? '¡Es un empate! Reinicia para jugar de nuevo.' 
                 : `¡Ganó ${datos.ganador}! Reinicia para jugar otra vez.`;
+            actualizarContador(datos.victorias)
             return;
         }
 
@@ -67,6 +75,7 @@ function reiniciarJuego() {
             celdas.forEach(celda => (celda.textContent = ''));
             estado.textContent = 'Tu turno';
             juegoTerminado = false; // Permitir nuevos movimientos
+            actualizarContador(datos.victorias)
         })
         .catch(error => {
             console.error('Error al reiniciar el juego:', error);
