@@ -71,12 +71,12 @@ def jugar():
 
     # Verificamos empate.
     if juego.comprobar_empate():
-        bot.actualizar_q(0, bot.obtener_estado(juego.tablero)) # Recompensa neutral.
+        bot.actualizar_q(bot.estado_anterior, bot.accion_anterior, 0, bot.obtener_estado(juego.tablero)) # Recompensa neutral.
         bot.guardar_q_table() # Guardar tabla Q.
         return jsonify({
             'movimiento_bot': movimiento_bot,
             'estado_juego': juego.tablero,
-            'ganador': ganador
+            'ganador': 'Empate'
         })
     
     # Actualizar Q para estado intermedio.

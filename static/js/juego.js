@@ -33,7 +33,7 @@ function realizarMovimiento(posicion) {
 
         if (datos.ganador) {
             juegoTerminado = true; // Marcar el juego como terminado
-            estado.textContent = datos.ganador === 'Empate' 
+            estado.textContent = datos.ganador.toLowerCase() === 'empate'
                 ? '¡Es un empate! Reinicia para jugar de nuevo.' 
                 : `¡Ganó ${datos.ganador}! Reinicia para jugar otra vez.`;
             return;
