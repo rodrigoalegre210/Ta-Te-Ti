@@ -117,7 +117,10 @@ def reiniciar():
     juego = Juego()
     bot.estado_anterior = None
     bot.accion_anterior = None
-    return jsonify({'mensaje': 'Juego reiniciado'})
+    return jsonify({'mensaje': 'Juego reiniciado',
+                    'victorias_usuario': victorias_usuario,
+                    'victorias_bot': victorias_bot
+                    })
 
 if __name__ == "__main__":
     app.run(debug = True)

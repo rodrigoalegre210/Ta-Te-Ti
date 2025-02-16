@@ -14,9 +14,9 @@ function actualizarTablero(estadoJuego) {
     });
 }
 
-function actualizarContador(victorias) {
-    contadorUsuario.textContent = victorias.usuario;
-    contadorBot.textContent = victorias.bot;
+function actualizarContador(usuario, bot) {
+    contadorUsuario.textContent = usuario;
+    contadorBot.textContent = bot;
 }
 
 // Función para realizar un movimiento
@@ -43,7 +43,7 @@ function realizarMovimiento(posicion) {
             estado.textContent = datos.ganador.toLowerCase() === 'empate'
                 ? '¡Es un empate! Reinicia para jugar de nuevo.' 
                 : `¡Ganó ${datos.ganador}! Reinicia para jugar otra vez.`;
-            actualizarContador(datos.victorias)
+            actualizarContador(datos.victorias_usuario, datos.victorias_bot)
             return;
         }
 
@@ -70,12 +70,12 @@ function reiniciarJuego() {
             if (!response.ok) throw new Error(`Error en la solicitud: ${response.statusText}`);
             return response.json();
         })
-        .then(() => {
+        .then(datos => {
             // Limpiar el tablero y reiniciar estado
             celdas.forEach(celda => (celda.textContent = ''));
             estado.textContent = 'Tu turno';
             juegoTerminado = false; // Permitir nuevos movimientos
-            actualizarContador(datos.victorias)
+            actualizarContador(datos.victorias_usuario, datos.victorias_bot);
         })
         .catch(error => {
             console.error('Error al reiniciar el juego:', error);

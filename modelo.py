@@ -35,18 +35,6 @@ class Bot:
         except (FileNotFoundError, json.JSONDecodeError):
             self.q_table = {}
     
-    # Selecciona una acción usando la política epsilon-greedy.
-    """def elegir_accion(self, estado, movimientos_validos):
-        if random.random() < self.epsilon:
-            return random.choice(movimientos_validos) # Exploración: elige una acción aleatoria.
-        
-        else:
-            return max(
-                movimientos_validos,
-                # Explotación: elige la mejor acción según la tabla Q.
-                key = lambda accion: self.q_table.get((estado, accion), 0) 
-            )
-       """ 
     # Actualiza los valores Q usando la ecuación de Bellman.
     def actualizar_q(self, estado_anterior, accion_anterior, recompensa, estado_actual):
 
