@@ -71,7 +71,7 @@ acciones aleatorias con probabilidad *ε* y elige la mejor acción conocida con 
 3. El bot (símbolo **O**) responderá automáticamente con su jugada.
 4. Seguir jugando hasta que haya un ganador o un empate entre ambos.
 5. Podes reiniciar el juego haciendo clic en "Jugar otra vez".
-6. La interfaz cuenta con un contador de victorias para ver quien va ganando.
+6. La interfaz cuenta con un contador de victorias para saber quien va ganando.
 
 > [!TIP]
 > Intentá jugar varias veces contra el bot para ver cómo cambia su estrategia.
